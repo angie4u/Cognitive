@@ -43,7 +43,6 @@
                                 <button id="goBtn" class="btn btn-default" type="button">Go!</button>
                             </span>
                         </div>
-                        <!-- /input-group -->
                     </form>
                 </p>
             </div>
@@ -73,8 +72,7 @@
         </footer>
 
     </div>
-    <!-- /container -->
-
+    
 
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap-filestyle.min.js">
@@ -112,10 +110,12 @@
         $(document).ready(function () {
             $('#goBtn').click(function () {
                 $.ajax({
-                    url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/e1381295-16e1-4073-9ea9-c9585e8ffe10/url?iterationId=2f7e0db1-5a89-44e1-ae39-148246fcc082',
+                    //PERFORMANCE 탭의 Prediction URL 에서 상단의 image URL 부분 참조 
+                    url: 'copy from Prediction API - image URL',
                     method: 'POST',
                     headers: {
-                        "prediction-key": "79ea46b6255542e285abd8d1be7249fe",
+                        //PERFORMANCE 탭의 Prediction URL 에서 Prediction-Key 참조 
+                        "prediction-key": "copy from Prediction-Key",
                         "content-type": "application/x-www-form-urlencoded"
                     },
                     data: {
@@ -136,10 +136,12 @@
                 var formData = new FormData(form);
                 formData.append("fileObj", $("#fileTag")[0].files[0]);
                 $.ajax({
-                    url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/e1381295-16e1-4073-9ea9-c9585e8ffe10/image?iterationId=2f7e0db1-5a89-44e1-ae39-148246fcc082',
+                    //PERFORMANCE 탭의 Prediction URL 에서 하단의 image file 부분 참조 
+                    url: 'copy from Prediction API - image file',
                     method: 'POST',
                     headers: {
-                        "prediction-key": "79ea46b6255542e285abd8d1be7249fe"
+                        //PERFORMANCE 탭의 Prediction URL 에서 Prediction-Key 참조 
+                        "prediction-key": "copy from Prediction-Key"
                     },
                     processData: false,
                     contentType: false,
