@@ -112,8 +112,16 @@ function parseJson(data) {
 이미 테스트를 해 보신 분들은 아시겠지만 noodle.html 페이지는 현재 동작하지 않습니다. 그 이유는 요청 URL 주소 및 Key 값이 유효하지 않기 때문입니다. 
 
 **01_Training Images** 페이지의 맨 마지막에 안내되어 있는데로, **PERFORMANCE** 탭의 **Prediction URL**을 클릭하셔서 **Prediction-Key**및 **URL 주소**를 확인하신 후 **noodle.html** 페이지의 해당 위치에 아래와 같이 알맞게 입력하시기 바랍니다. 
+![025](./images/025.JPG)
+![026](./images/026.JPG)
 
+완성된 모습은 다음과 같습니다(예시)
+![027](./images/027.JPG)
 
+## noodle.html 페이지 테스트하기
+
+변경사항을 저장하신 후 **noodle.html** 페이지를 새로고침 하여 테스트해보시기 바랍니다. 잘 동작하는 것을 확인하실 수 있습니다. 
+![028](./images/028.JPG)
 
 
 
