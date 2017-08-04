@@ -8,7 +8,7 @@ Custom Vision 폴더아래의 Example 폴더에는 미리 만들어둔 Custom Vi
 선호하시는 브라우저를 이용하여 **noodle.html** 파일을 오픈하시기 바랍니다. Custom Vision의 Quick Test에서 테스트 했던것과 같은 방식으로 이미지의 URL을 입력하거나 이미지 파일을 직접 업로드하여 결과를 확인하실 수 있습니다. 
 이 페이지의 주요 역할은 Custom Vision API에 HTTP POST 요청을 통해 이미지 데이터를 전송하면, json 형태의 응답을 파싱해서 사용자에게 보여주는 것 입니다. 
 
-* 이미지 URL 전송: 사용자가 Url을 입력하면 110~131의 Javascript 함수에서 이를 처리하고 결과값을 출력합니다. 
+* 이미지 URL 전송: 사용자가 Url을 입력하면 Javascript 함수에서 이를 처리하고 결과값을 출력합니다. 
 ```
 <!--사용자의 Url 입력을 받는 부분-->
 <form id="urlForm">
@@ -44,7 +44,7 @@ $(document).ready(function () {
     });
 });
 ```
-* 이미지 file 전송: 57~60 줄의 Form 객체로 사용자가 이미지 파일을 업로드 하면 133~156의 Javascript 함수에서 이를 처리하고 결과값을 보여줍니다. 
+* 이미지 file 전송: 사용자가 이미지 파일을 업로드 하면 Javascript 함수에서 이를 처리하고 결과값을 보여줍니다. 
 ```
 <!--사용자가 이미지 파일을 업로드 하는 부분-->
 <form class="form-inline" id="fileForm" method="post" enctype="multipart/form-data">
@@ -78,7 +78,7 @@ $(document).ready(function () {
     });
 });
 ```
-* JSON 데이터 파싱: 84~108 줄의 parseJson 함수에서는 JSON 형태로 온 결과값을 파싱하여 사용자에게 보여주는 부분입니다. 
+* JSON 데이터 파싱: parseJson 함수에서는 JSON 형태로 온 결과값을 파싱하여 사용자에게 보여줍니다.
 ```
 function parseJson(data) {
     var object = JSON.parse(data);
