@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>냉면</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h3 class="text-muted">Custom Vision Services - Hands on Lab</h3>
+        </div>
+
+        <div class="jumbotron text-center">
+            <h1>Cold Noodle!!!</h1>
+            <p>어떤게 과연 냉면일까?!</p>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="img/bibim.jpg" class="img-responsive">
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="img/cold.jpg" class="img-responsive">
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="img/party.jpg" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row marketing">
+            <div class="col-lg-5">
+                <h4>이미지 URL 입력</h4>
+                <p>
+                    <form id="urlForm">
+                        <div class="input-group">
+                            <input id="imgUrl" type="text" class="form-control" placeholder="Image URL...">
+                            <span class="input-group-btn">
+                                <button id="goBtn" class="btn btn-default" type="button">Go!</button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </form>
+                </p>
+            </div>
+
+            <div class="col-lg-2 text-center">
+                <h1>Or</h1>
+            </div>
+
+            <div class="col-lg-5">
+                <h4>파일 업로드</h4>
+                <p>
+                    <form class="form-inline" id="fileForm" method="post" enctype="multipart/form-data">
+                        <input type="file" id="fileTag" name="fileTag" class="filestyle" data-icon="false" data-buttonBefore="true" />
+                        <button id="sendBtn" class="btn btn-primary" type="button">Send</button>
+                    </form>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="container" id="resultContainer">
+            <!-- 결과 값 출력하기 위한 공간 -->
+        </div>
+        <hr>
+        <footer class="footer">
+            <p>&copy; EUNK Powered by Microsoft Custom Vision Services</p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-filestyle.min.js">
+
+    </script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+
+    <script>
+        function parseJson(data) {
+            var object = JSON.parse(data);
+            var percentValue = object.Predictions[0].Probability;
+            var noodleValue = object.Predictions[0].Tag;
+            if (percentValue > 0.9) {
+                percentValue = percentValue * 100;
+                $('#percent').append(percentValue);
+                $('#noodleName').append(noodleValue);
+
+                var resultMessage = '<h1>' + noodleValue + '일 확률이 ' + percentValue + '% 정도 됩니다!</h1>';
+                document.getElementById('resultContainer').innerHTML = resultMessage;
+            }
+            else if (percentValue > 0.5) {
+                percentValue = percentValue * 100;
+                $('#percent').append(percentValue);
+                $('#noodleName').append(noodleValue);
+
+                var resultMessage = '<h1>확실하진 않지만... ' + noodleValue + '일 확률이 ' + percentValue + '% 정도 됩니다!</h1>';
+                document.getElementById('resultContainer').innerHTML = resultMessage;
+            }
+            else {
+                var exceptionMessage = '<h1>이거 냉면사진 맞아요? 아닌것 같은데...</h1>'
+                document.getElementById('resultContainer').innerHTML = exceptionMessage;
+            }
+        }
+
+        $(document).ready(function () {
+            $('#goBtn').click(function () {
+                $.ajax({
+                    url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/e1381295-16e1-4073-9ea9-c9585e8ffe10/url?iterationId=2f7e0db1-5a89-44e1-ae39-148246fcc082',
+                    method: 'POST',
+                    headers: {
+                        "prediction-key": "79ea46b6255542e285abd8d1be7249fe",
+                        "content-type": "application/x-www-form-urlencoded"
+                    },
+                    data: {
+                        Url: $('#imgUrl').val()
+                    },
+                    dataType: 'text',
+                    success: function (data) {
+                        parseJson(data);
+                        document.getElementById('urlForm').reset();
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('#sendBtn').click(function () {
+                var form = $('#fileForm')[0];
+                var formData = new FormData(form);
+                formData.append("fileObj", $("#fileTag")[0].files[0]);
+                $.ajax({
+                    url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/e1381295-16e1-4073-9ea9-c9585e8ffe10/image?iterationId=2f7e0db1-5a89-44e1-ae39-148246fcc082',
+                    method: 'POST',
+                    headers: {
+                        "prediction-key": "79ea46b6255542e285abd8d1be7249fe"
+                    },
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    dataType: 'text',
+                    success: function (data) {
+                        parseJson(data);
+                        document.getElementById('fileForm').reset();
+                    }
+                });
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
