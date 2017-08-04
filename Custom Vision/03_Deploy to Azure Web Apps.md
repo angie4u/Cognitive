@@ -47,13 +47,13 @@ ftp로 파일을 업로드 하기 **FileZilla**라는 프로그램을 사용할 
 ![042](./images/042.JPG)
 
 기존에 업로드 되어있는 **hostingstart.html** 파일을 삭제하시기 바랍니다. 
-![043](./images/043.JPG)
+![043](./images/043.jpg)
 
 오른쪽의 영역에서 **Custom Vision/Example** 디렉토리로 이동하시기 바랍니다. 
 ![048](./images/048.JPG)
 
 **assets, img 폴더 및 index.html** 파일을 서버로 업로드하시기 바랍니다. 
-![044](./images/044.JPG)
+![044](./images/044.jpg)
 
 업로드가 완료되면 **wwwroot** 폴더 아래에 다음과 같이 업로드된 파일 목록을 확인하실 수 있습니다. 
 ![045](./images/045.JPG)
